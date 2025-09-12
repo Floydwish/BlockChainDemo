@@ -71,6 +71,7 @@ contract SendToFallback{
     // 1. 部署合约
     Counter counter = new Counter();                                       // 目标合约
     FallbackInputOutput proxy = new FallbackInputOutput(address(counter)); // 代理合约
+    TestFallbackInputOutput;                                               // 测试合约
 
     // 2. 获取函数调用数据（获取目标合约的接口）
     (bytes memory getData, bytes memory incData) = testContract.getTestData();
@@ -80,6 +81,9 @@ contract SendToFallback{
     // 3. 通过代理调用（测试合约 -> 代理合约 -> 目标合约）
     testContract.test(address(proxy), getData);  // 调用Counter.get()
     testContract.test(address(proxy), incData);  // 调用Counter.inc()
+
+    // 4. 查看结果
+    通过 remix 可以看到 事件日志（包含返回的count 值）
 
 二、应用场景
 1. 升级代理：通过更换 target 地址来升级合约
