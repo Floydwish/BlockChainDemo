@@ -26,7 +26,7 @@ contract GasGolf {
      7.不检查 i 的上溢和下溢：35059             (本次测试：gas 无变化) 
 
     */
-    
+
     function sumIfEvenAndLessThan99(uint256[] memory nums) external {
 
         for(uint256 i = 0; i< nums.length; i++){
@@ -55,3 +55,14 @@ contract GasGolf {
         total = _total;
     }
 }
+
+/*
+关于 unchecked 说明：
+一、作用
+1. 节省 gas (省去了检查溢出的操作)
+2. 阻止溢出时抛出的错误（运行时，不会抛出错误，但结果是错的）
+
+二、使用场景
+1. 代码块：循环、数组
+2. 具体场景：DeFi 协议、NFT 项目、代币合约
+*/
